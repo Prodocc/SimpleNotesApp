@@ -1,6 +1,7 @@
 package com.notes.controller;
 
 import com.notes.dto.CreateNoteRequest;
+import com.notes.dto.PatchNoteRequest;
 import com.notes.dto.UpdateNoteRequest;
 import com.notes.model.Note;
 import com.notes.service.NoteService;
@@ -40,6 +41,11 @@ public class NoteController {
     @PutMapping("/{oldTitle}")
     public Note editNote(@PathVariable String oldTitle, @RequestBody UpdateNoteRequest request) {
         return noteService.editNoteByTitle(oldTitle, request.getTitle(), request.getText());
+    }
+
+    @PatchMapping("/{oldTitle}")
+    public Note patchNote(@PathVariable String oldTitle, @RequestBody PatchNoteRequest request){
+        return noteService.patchNoteByTitle(oldTitle, request.getTitle(), request.getText());
     }
 
     @DeleteMapping("/{title}")

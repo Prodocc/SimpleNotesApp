@@ -59,6 +59,20 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     @Transactional
+    public Note patchNoteByTitle(String oldTitle, String newTitle, String newText){
+        Note noteToUpdate = noteRepository.findByTitle(oldTitle).orElseThrow(() -> new NoteNotFoundException("Заметка с названием " + oldTitle + " не найдена"));
+        if (newTitle != null){
+            noteToUpdate.setTitle(newTitle);
+        }
+        if (newText != null){
+            noteToUpdate.setText(newText);
+        }
+        noteRepository.save(noteToUpdate);
+        return noteToUpdate;
+    }
+
+    @Override
+    @Transactional
     public void deleteNoteByTitle(String title) {
         if (noteRepository.existsByTitle(title)) {
             noteRepository.deleteByTitle(title);

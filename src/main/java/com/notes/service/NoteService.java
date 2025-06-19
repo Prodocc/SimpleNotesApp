@@ -16,4 +16,7 @@ public interface NoteService {
     Note editNoteByTitle(String oldTitle, String newTitle, String newText);
 
     void deleteNoteByTitle(String title);
+
+    Note patchNoteByTitle(String oldTitle, String newTitle, String newText);
 }
+
